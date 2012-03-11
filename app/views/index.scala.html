@@ -1,7 +1,15 @@
-@(message: String)
+@(urlForm: Form[Url])
+
+@import helper.twitterBootstrap._
 
 @main("URLshot") {
     <h1>Short your url</h1>
-    @{message}
-    
+    @helper.form(action = routes.Application.shotUrl, 'id -> "urlForm", 'class -> "well form-inline") {
+        <div class="input-prepend">
+              <span class="add-on"><i class="icon-bookmark"></i></span>
+              <input type="text" name="url" id="url">
+              <input type="submit" id="sbmt" class="btn primary" value="Get url">
+        </div>
+    }
+
 }

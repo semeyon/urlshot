@@ -2,12 +2,12 @@
  
 # --- !Ups
  
-CREATE TABLE urls (
-  id                       INT PRIMARY KEY,
-  url                      CLOB NOT NULL,
-  conter                   INT NOT NULL DEFAULT 0
+CREATE TABLE url (
+  id             INT AUTO_INCREMENT PRIMARY KEY,
+  url            CLOB NOT NULL,
+  counter        INT NOT NULL DEFAULT 0
 );
  
 # --- !Downs
  
-DROP TABLE IF EXISTS urls;
+DROP TABLE IF EXISTS url;
