@@ -53,12 +53,12 @@ object Url{
     /**
     * Retrive an url by the acual url
     */
-    def getByUrl(url: String): Url = {
+    def getByUrl(url: String): Option[Url] = {
        DB.withConnection {
             implicit connection =>
             SQL("select * from url where url = {url}").on(
                 'url -> url
-            ).as(Url.simple *) head
+            ).as(Url.simple.singleOpt)
         } 
     }
     

@@ -29,8 +29,13 @@ object Application extends Controller {
             urlForm.bindFromRequest.fold(
                 errors => BadRequest(views.html.index(errors)), //TODO: in form
                 url    => {
-                    Url.create(url)
-                    val urlWithId = Url.getByUrl(url.url)
+                    val urlWithId = Url.getByUrl(url.url) match {
+                        case Some(u) => u 
+                        case None    => { 
+                            Url.create(url)
+                            Url.getByUrl(url.url) get
+                        }
+                    }
                     val postfix   = Converter.encode(urlWithId.id.toString.toInt) //Yes! It's agly! TODO:!
                     val shortUrl  = "http://%s/%s".format(request.host, postfix)
                     Ok(views.html.shot(shortUrl))
