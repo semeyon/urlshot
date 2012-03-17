@@ -8,7 +8,15 @@ h1{
     margin:auto;
     width:380px;
     }
-
+    .hero-unit .result h1{
+        font-size:40px;
+        }
+    .hero-unit .result p{
+        font-size:30px;
+        }
+        .hero-unit .result p a{
+            font-size:25px;
+            }
 #sbmt, #url{
     float:left;
     }

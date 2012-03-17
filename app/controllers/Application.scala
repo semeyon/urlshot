@@ -31,8 +31,8 @@ object Application extends Controller {
                 url    => {
                     Url.create(url)
                     val urlWithId = Url.getByUrl(url.url)
-                    val postfix   = Converter.encode(urlWithId.id.toString.toInt) //Yes! It's agly!
-                    val shortUrl = Url(url=postfix)
+                    val postfix   = Converter.encode(urlWithId.id.toString.toInt) //Yes! It's agly! TODO:!
+                    val shortUrl  = "http://%s/%s".format(request.host, postfix)
                     Ok(views.html.shot(shortUrl))
                 }
             )
@@ -40,9 +40,13 @@ object Application extends Controller {
     
     def getUrl(abc: String) = Action {
         val id  = Converter.decode(abc)
-        val url = Url.getById(id)
-        
-        Redirect(url.url, status = MOVED_PERMANENTLY)
+        Url.getById(id) match {
+            case Some(u) => {
+                Url.incCounter(id)
+                Redirect(u.url, status = MOVED_PERMANENTLY)
+            }
+            case None => NotFound(views.html.notfound())
+        }
     }
     
     def clearUrl = TODO

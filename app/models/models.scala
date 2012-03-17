@@ -41,12 +41,12 @@ object Url{
     /**
     * Retrieve an url from the id.
     */
-    def getById(id: Long): Url = {
+    def getById(id: Long): Option[Url] = {
        DB.withConnection {
             implicit connection =>
             SQL("select * from url where id = {id}").on(
                 'id -> id
-            ).as(Url.simple *) head
+            ).as(Url.simple.singleOpt)
         } 
     }
     
@@ -81,7 +81,7 @@ object Url{
         DB.withConnection {
             implicit connection =>
             SQL("""
-                update 
+                update url 
                 set 
                     counter=counter+1 
                 where id={id}
