@@ -11,7 +11,7 @@ import models.Url
 object Application extends Controller {
   
     /*
-     * Submit url form
+     * Submit url form.
      */
     
      val urlForm = Form(
@@ -19,11 +19,17 @@ object Application extends Controller {
             "url" -> nonEmptyText //TODO: Change to text verifying(pattern())
         )((url) => Url(url=url))((url:Url) => Some(url.url))
     )
-
+    
+    /*
+     * Indes page.
+     */
     def index = Action {
       Ok(views.html.index(urlForm))
     }
     
+    /*
+     * Create short url action.
+     */
     def shotUrl = Action{ 
         implicit request =>
             urlForm.bindFromRequest.fold(
@@ -43,6 +49,10 @@ object Application extends Controller {
             )
     }
     
+     
+    /*
+     * Found and redirect to real url.
+     */
     def getUrl(abc: String) = Action {
         val id  = Converter.decode(abc)
         Url.getById(id) match {
@@ -53,7 +63,11 @@ object Application extends Controller {
             case None => NotFound(views.html.notfound())
         }
     }
-    
+     
+    /*
+     * Same as shotUrl method, but instead html response it'll return 
+     * in plain text.
+     */
     def clearUrl = TODO
         
 }
