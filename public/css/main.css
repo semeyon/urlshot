@@ -4,7 +4,14 @@ body{
 h1{
     margin:0 0 50px 0;
     }
+.github-ribbon{
+    position:absolute;
+    top:0;
+    left:0;
+    border:0;
+    }
 .hero-unit{
+    position:relative;
     margin:auto;
     width:380px;
     }
@@ -20,7 +27,6 @@ h1{
 #sbmt, #url{
     float:left;
     }
-
 #url{
     width:240px;
 }
