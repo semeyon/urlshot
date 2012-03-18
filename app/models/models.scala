@@ -6,6 +6,8 @@ import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
 
+import converter._
+
 case class Url(id:  Pk[Long] = NotAssigned, 
                url: String, 
                counter: Int = 0)
@@ -92,6 +94,22 @@ object Url{
             "id"  -> id
             ).executeUpdate()
         }
+    }
+
+    /*
+    * Get or create and return an short utl
+    */
+    
+    def getOrCreate(url: Url, host: String): String = {
+        val urlWithId = Url.getByUrl(url.url) match {
+            case Some(u) => u 
+            case None    => { 
+                Url.create(url)
+                Url.getByUrl(url.url) get
+            }
+        }
+        val postfix = Converter.encode(urlWithId.id.get.toInt)
+        "http://%s/%s".format(host, postfix)
     }
     
 }

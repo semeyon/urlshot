@@ -36,18 +36,7 @@ object Application extends Controller {
         implicit request =>
             urlForm.bindFromRequest.fold(
                 errors => BadRequest(views.html.index(errors)),
-                url    => {
-                    val urlWithId = Url.getByUrl(url.url) match {
-                        case Some(u) => u 
-                        case None    => { 
-                            Url.create(url)
-                            Url.getByUrl(url.url) get
-                        }
-                    }
-                    val postfix   = Converter.encode(urlWithId.id.get.toInt)
-                    val shortUrl  = "http://%s/%s".format(request.host, postfix)
-                    Ok(views.html.shot(shortUrl))
-                }
+                url    => Ok(views.html.shot(Url.getOrCreate(url,request.host)))
             )
     }
     
@@ -70,6 +59,17 @@ object Application extends Controller {
      * Same as shotUrl method, but instead html response it'll return 
      * in plain text.
      */
-    def clearUrl = TODO
+    def clearUrl = Action{
+        implicit request => 
+            urlForm.bindFromRequest.fold(
+                errors => {
+                    val ers = errors match {
+                        case Form(_, _, _errors, _) => _errors.map(_.message)
+                    }
+                    BadRequest(ers.mkString(", "))
+                },
+                url    => Ok(Url.getOrCreate(url, request.host))
+    )
+    }
         
 }
