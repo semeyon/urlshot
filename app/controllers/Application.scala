@@ -4,6 +4,7 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import play.api.data.validation.Constraints._
 
 import converter._
 import models.Url
@@ -16,7 +17,8 @@ object Application extends Controller {
     
      val urlForm = Form(
         mapping(
-            "url" -> nonEmptyText //TODO: Change to text verifying(pattern())
+            "url" -> nonEmptyText.verifying(pattern(Url.pattern, 
+                                     error="It's must be url!"))
         )((url) => Url(url=url))((url:Url) => Some(url.url))
     )
     

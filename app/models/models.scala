@@ -13,7 +13,11 @@ case class Url(id:  Pk[Long] = NotAssigned,
 object Url{
     
     // -- Parsers
-  
+   /*
+    * Url pattern
+    */
+    val pattern = """(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?""".r
+    
     /**
     * Parse a url from a ResultSet
     */
