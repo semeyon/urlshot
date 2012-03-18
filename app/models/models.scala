@@ -31,7 +31,6 @@ object Url{
     }
     
     // -- Queries
-  
     /**
     * Retrieve a list of all yrl from db.
     */

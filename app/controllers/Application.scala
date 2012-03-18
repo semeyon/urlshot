@@ -44,7 +44,7 @@ object Application extends Controller {
                             Url.getByUrl(url.url) get
                         }
                     }
-                    val postfix   = Converter.encode(urlWithId.id.toString.toInt) //Yes! It's agly! TODO:!
+                    val postfix   = Converter.encode(urlWithId.id.get.toInt)
                     val shortUrl  = "http://%s/%s".format(request.host, postfix)
                     Ok(views.html.shot(shortUrl))
                 }
