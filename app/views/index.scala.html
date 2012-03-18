@@ -10,6 +10,20 @@
               <input type="text" name="url" id="url">
               <input type="submit" id="sbmt" class="btn primary" value="Get url">
         </div>
+        @urlForm match {
+            case Form(_, _, errors, _) => {
+                @if(errors){
+                <div class="alert alert-error">
+                    <strong>Oops!</strong>
+                    <ul>
+                    @for(error <- errors){
+                        <li>@error.message</li>
+                    }
+                    </ul>
+                </div>
+                }
+            }
+        }
     }
 
 }

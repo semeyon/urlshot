@@ -35,7 +35,7 @@ object Application extends Controller {
     def shotUrl = Action{ 
         implicit request =>
             urlForm.bindFromRequest.fold(
-                errors => BadRequest(views.html.index(errors)), //TODO: in form
+                errors => BadRequest(views.html.index(errors)),
                 url    => {
                     val urlWithId = Url.getByUrl(url.url) match {
                         case Some(u) => u 
