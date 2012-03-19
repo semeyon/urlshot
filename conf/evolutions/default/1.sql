@@ -3,9 +3,10 @@
 # --- !Ups
  
 CREATE TABLE url (
-  id             INT AUTO_INCREMENT PRIMARY KEY,
-  url            CLOB NOT NULL,
-  counter        INT NOT NULL DEFAULT 0
+    id             SERIAL,
+    url            TEXT NOT NULL,
+    counter        INT NOT NULL DEFAULT 0,
+    PRIMARY KEY(id)
 );
  
 # --- !Downs
