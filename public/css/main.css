@@ -30,8 +30,8 @@ h1{
         }
     .hero-unit .result div{
         overflow:auto;
-        border-radius: 5px;
-        border: 1px solid gray;
+        border-bottom: 1px solid gray;
+        border-top: 1px solid gray;
         margin: 3px 0px 3px 0;
         }
         .hero-unit .result div p{
