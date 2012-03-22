@@ -9,6 +9,7 @@ h1{
     top:0;
     left:0;
     border:0;
+    z-index: 1000;
     }
 .hero-unit{
     position:relative;
@@ -18,9 +19,12 @@ h1{
     -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
+    .hero-unit h1{
+        font-size:59px;
+        }
     .hero-unit .result{
         position: relative;
-    }
+        }
     .hero-unit .result h1{
         font-size:40px;
         }
