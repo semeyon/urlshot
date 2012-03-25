@@ -15,7 +15,7 @@ object Application extends Controller {
      * Submit url form.
      */
     
-     val urlForm = Form(
+    val urlForm = Form(
         mapping(
             "url" -> nonEmptyText.verifying(pattern(Url.pattern, 
                                      error="It's must be url!"))
