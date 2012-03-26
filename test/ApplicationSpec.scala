@@ -38,7 +38,7 @@ class ApplicationSpec extends Specification {
                 )
                 status(result) must equalTo(BAD_REQUEST)
                 contentAsString(result) must contain("""It's must be url!""")
-                contentAsString(result) must contain("""error.required""")
+                contentAsString(result) must contain("""This field is required""")
             }
         }
         
