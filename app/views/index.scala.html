@@ -1,29 +1,14 @@
 @(urlForm: Form[Url])
 
 @import helper.twitterBootstrap._
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(urlInput.f) } 
 
 @main("URLshot") {
     <h1>Short your url</h1>
     @helper.form(action = routes.Application.shotUrl, 'id -> "urlForm", 'class -> "well form-inline") {
-        <div class="input-prepend">
-              <span class="add-on"><i class="icon-bookmark"></i></span>
-              <input type="text" name="url" id="url">
-              <input type="submit" id="sbmt" class="btn primary" value="Get url">
-        </div>
-        @urlForm match {
-            case Form(_, _, errors, _) => {
-                @if(errors){
-                <div class="alert alert-error">
-                    <strong>Oops!</strong>
-                    <ul>
-                    @for(error <- errors){
-                        <li>@error.message</li>
-                    }
-                    </ul>
-                </div>
-                }
-            }
-        }
+        @inputText(urlForm("url"))
     }
 
 }

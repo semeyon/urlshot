@@ -1,0 +1,17 @@
+@(elements: helper.FieldElements)
+
+<div class="input-prepend">
+    <span class="add-on"><i class="icon-bookmark"></i></span>
+    @elements.input
+    <input type="submit" id="sbmt" class="btn primary" value="Get url">
+</div>
+@if(elements.hasErrors){
+    <div class="alert alert-error">
+        <strong>Oops!</strong>
+        <ul>
+        @for(error <- elements.errors){
+            <li>@error</li>
+        }
+        </ul>
+    </div>
+}
