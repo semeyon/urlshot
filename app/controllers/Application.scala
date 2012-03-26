@@ -62,8 +62,8 @@ object Application extends Controller {
     def clearUrl = Action{
         implicit request => 
             urlForm.bindFromRequest.fold(
-                errors => {
-                    val ers = errors match {
+                formWithErrors => {
+                    val ers = formWithErrors match {
                         case Form(_, _, _errors, _) => _errors.map(_.message)
                     }
                     BadRequest(ers.mkString(", "))
